@@ -1,0 +1,82 @@
+/* General Styles */
+body {
+    font-family: "Courier New", Courier, monospace; /* Old-school terminal font */
+    background-color: #000; /* Terminal-style dark background */
+    color: #00ff00; /* Green text to mimic terminal */
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styles */
+header {
+    background-color: #111; /* Slightly lighter background for the header */
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #00ff00;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    color: #00ff00;
+}
+
+header p {
+    margin: 5px 0 0;
+    font-size: 1.2em;
+    color: #00cc00;
+}
+
+/* Container Styles */
+.container {
+    padding: 20px;
+    line-height: 1.6;
+}
+
+/* Section Titles */
+h2 {
+    color: #00ff00;
+    border-bottom: 1px solid #00ff00;
+    padding-bottom: 5px;
+}
+
+/* TODO List */
+.todo-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.todo-list li {
+    margin: 10px 0;
+    padding: 5px 10px;
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    background-color: #111;
+}
+
+.todo-list li:hover {
+    background-color: #222;
+    cursor: pointer;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #111;
+    color: #00ff00;
+    border-top: 2px solid #00ff00;
+    font-size: 0.9em;
+    margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    body {
+        font-size: 90%;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+}
