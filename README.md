@@ -29,3 +29,8 @@ kubectl logs -l app=todo-app
 
 
 k3d cluster stop my-cluster
+
+
+k3d cluster delete my-cluster
+
+k3d cluster create my-cluster --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
