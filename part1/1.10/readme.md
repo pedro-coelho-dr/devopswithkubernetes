@@ -73,7 +73,7 @@ Conditions:
   PodScheduled                True 
 Volumes:
   shared-logs:
-    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Type:       EmptyDir
     Medium:     
     SizeLimit:  <unset>
   kube-api-access-c646h:
@@ -98,6 +98,4 @@ Events:
   Normal  Pulled     2m24s  kubelet            Successfully pulled image "pedrocoelhodr/log-output:reader-1.1" in 3.586s (3.586s including waiting). Image size: 49127062 bytes.
   Normal  Created    2m24s  kubelet            Created container reader
   Normal  Started    2m24s  kubelet            Started container reader
-
-
 ```
