@@ -4,7 +4,7 @@ metadata:
   name: pingpong-ingress
   namespace: pingpong-log
 spec:
-  ingressClassName: traefik  # Updated field
+  ingressClassName: traefik
   rules:
   - http:
       paths:
@@ -14,11 +14,11 @@ spec:
           service:
             name: pingpong-service
             port:
-              number: 2345
+              number: 3000
       - path: /getpong
         pathType: Prefix
         backend:
           service:
             name: pingpong-service
             port:
-              number: 2345
+              number: 3000

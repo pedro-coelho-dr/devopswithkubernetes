@@ -17,7 +17,7 @@ spec:
         project: pingpong-log
       containers:
         - name: writer
-          image: pedrocoelhodr/log-output:writer-1.5
+          image: pedrocoelhodr/log-output:writer-1.7
           ports:
             - containerPort: 3001
           resources:

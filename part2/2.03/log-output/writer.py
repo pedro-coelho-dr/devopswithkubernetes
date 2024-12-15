@@ -3,8 +3,8 @@ import hashlib
 import requests
 from datetime import datetime, timezone
 
-ping_pong_service_url = "http://pingpong-service:2345/getpong"
-reader_service_url = "http://log-output-svc:2345/update"
+ping_pong_service_url = "http://pingpong-service.pingpong-log.svc.cluster.local:3000/getpong"
+reader_service_url = "http://log-output-svc:3002/update"
 
 def compute_hash(content):
     return hashlib.sha256(content.encode()).hexdigest()
