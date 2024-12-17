@@ -21,7 +21,7 @@ spec:
             claimName: todo-pvc
       containers:
         - name: todo-app
-          image: pedrocoelhodr/todo-app:frontend-1.0
+          image: pedrocoelhodr/todo-app:frontend-1.1
           volumeMounts:
             - name: todo-images
               mountPath: /usr/src/app/data

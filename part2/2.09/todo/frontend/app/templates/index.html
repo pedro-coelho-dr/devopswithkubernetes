@@ -22,10 +22,13 @@
         <!-- TODO Section -->
         <section class="todo-section">
             <h2>Your TODO List</h2>
-            
+
+            <!-- Display messages -->
+            <p id="message"></p>
+
             <!-- Input for new TODO -->
             <div class="todo-input">
-                <form method="POST" action="/add-todo">
+                <form>
                     <input type="text" id="todo-input" name="todo" maxlength="140" placeholder="Add a new TODO (max 140 characters)" required>
                     <button type="submit">Create TODO</button>
                 </form>
@@ -34,7 +37,7 @@
             <!-- Dynamic TODO List -->
             <ul class="todo-list">
                 {% for todo in todos %}
-                    <li>{{ todo }}</li>
+                    <li>{{ todo['content'] }}</li>
                 {% endfor %}
             </ul>
         </section>
@@ -42,5 +45,8 @@
     <footer>
         <p>2024 TODO App</p>
     </footer>
+
+    <!-- Load JavaScript -->
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>
