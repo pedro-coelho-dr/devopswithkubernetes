@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO Application</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>TODO Application</h1>
+        </div>
+    </header>
+    <div class="container">
+        <!-- Image Section -->
+        <div class="image-container">
+            <h2>Daily Inspiration</h2>
+            <img src="{{ image_path }}" alt="Image">
+        </div>
+        
+        <!-- TODO Section -->
+        <section class="todo-section">
+            <h2>Your TODO List</h2>
+
+            <!-- Display messages -->
+            <p id="message"></p>
+
+            <!-- Input for new TODO -->
+            <div class="todo-input">
+                <form>
+                    <input type="text" id="todo-input" name="todo" maxlength="140" placeholder="Add a new TODO (max 140 characters)" required>
+                    <button type="submit">Create TODO</button>
+                </form>
+            </div>
+
+            <!-- Dynamic TODO List -->
+            <ul class="todo-list">
+                {% for todo in todos %}
+                    <li>{{ todo['content'] }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+    <footer>
+        <p>2024 TODO App</p>
+    </footer>
+
+    <!-- Load JavaScript -->
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
