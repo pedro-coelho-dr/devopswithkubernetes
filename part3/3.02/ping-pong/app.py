@@ -42,6 +42,11 @@ def init_db():
 
 init_db()
 
+@app.route("/", methods=["GET"])
+def root():
+    return jsonify({"message": "Welcome to Ping-Pong Service"})
+
+
 @app.route("/pingpong", methods=["GET"])
 def ping_pong():
     conn = get_db_connection()

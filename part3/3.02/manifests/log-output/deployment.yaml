@@ -4,39 +4,24 @@ kind: Deployment
 metadata:
   name: log-output
   namespace: pingpong-log
-
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: log-output
-
   template:
-
     metadata:
       labels:
         app: log-output
-
     spec:
-      nodeSelector:
-        project: pingpong-log
       containers:
-
         - name: writer
           image: pedrocoelhodr/log-output:writer-1.7
           ports:
             - containerPort: 3001
-          resources:
-            requests:
-              memory: "64Mi"
-              cpu: "250m"
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
-
 
         - name: reader
-          image: pedrocoelhodr/log-output:reader-1.7
+          image: pedrocoelhodr/log-output:reader-1.8
           ports:
             - containerPort: 3002
 
@@ -51,15 +36,6 @@ spec:
             - name: config-volume
               mountPath: /config
               readOnly: true
-
-          resources:
-            requests:
-              memory: "64Mi"
-              cpu: "250m"
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
-
       volumes:
         - name: config-volume
 

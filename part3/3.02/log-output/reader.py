@@ -29,6 +29,10 @@ def update_data():
         return jsonify({"status": "success"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+    
+@app.route("/", methods=["GET"])
+def root():
+    return jsonify({"message": "Log Output Service is running"})
 
 @app.route("/log")
 def display_data():
