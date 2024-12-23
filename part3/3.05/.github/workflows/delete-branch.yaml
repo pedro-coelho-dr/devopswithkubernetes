@@ -1,0 +1,40 @@
+name: Delete Environment on Branch Deletion
+
+on:
+  delete:
+    branches:
+      - '**'
+
+env:
+  PROJECT_ID: dwk-gke-445103
+  GKE_CLUSTER: dwk-cluster
+  GKE_ZONE: europe-north1-b
+
+jobs:
+  delete-environment:
+    name: Delete Kubernetes Namespace
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Authenticate with GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GKE_SA_KEY }}'
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Verify GCloud Installation
+        run: gcloud info
+
+      - name: Get GKE credentials
+        uses: google-github-actions/get-gke-credentials@v2
+        with:
+          cluster_name: ${{ env.GKE_CLUSTER }}
+          project_id: ${{ env.PROJECT_ID }}
+          location: ${{ env.GKE_ZONE }}
+
+      - name: Delete Namespace
+        run: |
+          BRANCH_NAME=${{ github.ref_name }}
+          kubectl delete namespace todo-${BRANCH_NAME} || echo "Namespace todo-${BRANCH_NAME} not found, skipping deletion."

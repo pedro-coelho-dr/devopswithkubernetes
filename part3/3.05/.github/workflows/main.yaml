@@ -62,13 +62,13 @@ jobs:
 
       - name: Create Namespace for Branch
         run: |
-          kubectl create namespace ${{ github.ref_name }} || true
-          kubectl config set-context --current --namespace=${{ github.ref_name }}
+          kubectl create namespace todo-${{ github.ref_name }} || true
+          kubectl config set-context --current --namespace=todo-${{ github.ref_name }}
 
       - name: Create Kubernetes Secret
         run: |
           kubectl create secret generic todo-db-secret \
-            --namespace ${{ github.ref_name }} \
+            --namespace todo-${{ github.ref_name }} \
             --from-literal=POSTGRES_USER=${{ secrets.POSTGRES_USER }} \
             --from-literal=POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
             --from-literal=POSTGRES_DB=${{ secrets.POSTGRES_DB }} \
@@ -80,7 +80,7 @@ jobs:
       - name: Deploy to GKE
         run: |
           cd ./part3/3.03/manifests
-          kustomize edit set namespace ${{ github.ref_name }}
+          kustomize edit set namespace todo-${{ github.ref_name }}
           kustomize edit set image PROJECT/BACKEND_IMAGE=gcr.io/${{ env.PROJECT_ID }}/${{ env.BACKEND_IMAGE }}:${{ env.BRANCH }}-${{ github.sha }}
           kustomize edit set image PROJECT/FRONTEND_IMAGE=gcr.io/${{ env.PROJECT_ID }}/${{ env.FRONTEND_IMAGE }}:${{ env.BRANCH }}-${{ github.sha }}
           kustomize edit set image PROJECT/CRONJOB_IMAGE=gcr.io/${{ env.PROJECT_ID }}/${{ env.CRONJOB_IMAGE }}:${{ env.BRANCH }}-${{ github.sha }}
