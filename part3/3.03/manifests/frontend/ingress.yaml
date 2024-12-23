@@ -4,11 +4,10 @@ metadata:
   name: todo-app-ingress
   namespace: todo
 spec:
-  ingressClassName: traefik
   rules:
   - http:
       paths:
-      - path: /todo
+      - path: /
         pathType: Prefix
         backend:
           service:

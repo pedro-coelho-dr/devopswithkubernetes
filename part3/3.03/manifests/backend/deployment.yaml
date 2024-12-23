@@ -17,7 +17,7 @@ spec:
         project: todo
       containers:
         - name: todo-backend
-          image: pedrocoelhodr/todo-app:backend-1.2
+          image: PROJECT/IMAGE:TAG
           ports:
             - containerPort: 5001
           env:
@@ -40,10 +40,3 @@ spec:
               value: todo-db-service
             - name: POSTGRES_PORT
               value: "5432"
-          resources:
-            requests:
-              memory: "64Mi"
-              cpu: "250m"
-            limits:
-              memory: "128Mi"
-              cpu: "500m"

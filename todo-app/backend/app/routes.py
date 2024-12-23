@@ -24,6 +24,10 @@ def get_db_connection():
         password=DB_PASSWORD
     )
 
+@backend_routes.route("/", methods=["GET"])
+def health_check():
+    return jsonify({"message": "Todo Backend Service is running"}), 200
+
 @backend_routes.route("/todos", methods=["GET"])
 def get_todos():
     conn = get_db_connection()

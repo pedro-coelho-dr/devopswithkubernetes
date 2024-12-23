@@ -4,9 +4,6 @@ metadata:
   name: todo-pvc
   namespace: todo
 spec:
-  storageClassName: todo-storage
   accessModes:
     - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+  storageClassName: standard

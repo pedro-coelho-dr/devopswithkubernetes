@@ -4,10 +4,16 @@ metadata:
   name: todo-backend-ingress
   namespace: todo
 spec:
-  ingressClassName: traefik
   rules:
     - http:
         paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: todo-backend-service
+                port:
+                  number: 5001
           - path: /todos
             pathType: Prefix
             backend:

@@ -20,7 +20,7 @@ spec:
         spec:
           containers:
           - name: todo-cronjob-container
-            image: pedrocoelhodr/todo-app:cronjob-1.0
+            image: PROJECT/IMAGE:TAG
             env:
             - name: BACKEND_URL
               value: "http://todo-backend-service:5001/todos"

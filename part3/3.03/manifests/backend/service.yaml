@@ -4,9 +4,10 @@ metadata:
   name: todo-backend-service
   namespace: todo
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: todo-backend
   ports:
     - port: 5001
+      protocol: TCP
       targetPort: 5001

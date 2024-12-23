@@ -6,7 +6,7 @@ from .services.image_service import get_cached_image
 BACKEND_URL = "http://todo-backend-service:5001/todos"
 
 def init_routes(app):
-    @app.route("/todo")
+    @app.route("/")
     def todo():
         image_path = get_cached_image()
 
