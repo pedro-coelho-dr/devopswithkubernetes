@@ -62,7 +62,14 @@ jobs:
           docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.CRONJOB_IMAGE }}:${{ env.BRANCH }}-${{ github.sha }} ./todo-app/backend/jobs
           docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.CRONJOB_IMAGE }}:${{ env.BRANCH }}-${{ github.sha }}
 
-
+      - name: Create Kubernetes Secret
+        run: |
+          kubectl create secret generic todo-db-secret \
+            --namespace todo \
+            --from-literal=POSTGRES_USER=${{ secrets.POSTGRES_USER }} \
+            --from-literal=POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
+            --from-literal=POSTGRES_DB=${{ secrets.POSTGRES_DB }} \
+            --dry-run=client -o yaml | kubectl apply -f -
 
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2.1.0
