@@ -62,13 +62,13 @@ jobs:
 
       - name: Create Namespace for Branch
         run: |
-          kubectl create namespace ${{ github.ref_name }} || true
-          kubectl config set-context --current --namespace=${{ github.ref_name }}
+          kubectl create namespace todo-${{ github.ref_name }} || true
+          kubectl config set-context --current --namespace=todo-${{ github.ref_name }}
 
       - name: Create Kubernetes Secret
         run: |
           kubectl create secret generic todo-db-secret \
-            --namespace ${{ github.ref_name }} \
+            --namespace todo-${{ github.ref_name }} \
             --from-literal=POSTGRES_USER=${{ secrets.POSTGRES_USER }} \
             --from-literal=POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
             --from-literal=POSTGRES_DB=${{ secrets.POSTGRES_DB }} \
