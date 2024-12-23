@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   # Secrets
   #- db/secret.yaml
+  # github secrets now
 
   # Services
   - db/service.yaml
