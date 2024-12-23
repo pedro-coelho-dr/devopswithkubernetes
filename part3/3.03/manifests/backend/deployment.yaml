@@ -13,8 +13,6 @@ spec:
       labels:
         app: todo-backend
     spec:
-      nodeSelector:
-        project: todo
       containers:
         - name: todo-backend
           image: PROJECT/IMAGE:TAG
