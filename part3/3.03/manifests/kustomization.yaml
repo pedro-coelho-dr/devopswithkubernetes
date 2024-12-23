@@ -29,13 +29,13 @@ resources:
   - jobs/cronjob.yaml
 
 images:
-  - name: PROJECT/IMAGE
+  - name: PROJECT/BACKEND_IMAGE
     newName: gcr.io/dwk-gke-445103/todo-app-backend
     newTag: ${{ github.ref_name }}-${{ github.sha }}
-  - name: PROJECT/IMAGE
+  - name: PROJECT/FRONTEND_IMAGE
     newName: gcr.io/dwk-gke-445103/todo-app-frontend
     newTag: ${{ github.ref_name }}-${{ github.sha }}
-  - name: PROJECT/IMAGE
+  - name: PROJECT/CRONJOB_IMAGE
     newName: gcr.io/dwk-gke-445103/todo-app-cronjob
     newTag: ${{ github.ref_name }}-${{ github.sha }}
 

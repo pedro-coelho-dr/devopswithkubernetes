@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: todo-backend
-          image: PROJECT/IMAGE:TAG
+          image: PROJECT/BACKEND_IMAGE:TAG
           ports:
             - containerPort: 5001
           env:
