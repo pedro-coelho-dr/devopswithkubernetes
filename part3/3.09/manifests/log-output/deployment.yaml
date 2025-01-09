@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-output
+  namespace: pingpong-log
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-output
+  template:
+    metadata:
+      labels:
+        app: log-output
+    spec:
+      containers:
+        - name: writer
+          image: pedrocoelhodr/log-output:writer-1.7
+          ports:
+            - containerPort: 3001
+          resources:
+            requests:
+              memory: "32Mi" 
+              cpu: "100m"    
+            limits:
+              memory: "64Mi"  
+              cpu: "200m"     
+
+        - name: reader
+          image: pedrocoelhodr/log-output:reader-1.8
+          ports:
+            - containerPort: 3002
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: log-output-configmap
+                  key: MESSAGE
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config
+              readOnly: true
+          resources:
+            requests:
+              memory: "32Mi"  
+              cpu: "100m"     
+            limits:
+              memory: "64Mi"  
+              cpu: "200m"    
+      volumes:
+        - name: config-volume
+          configMap:
+            name: log-output-configmap
+            items:
+              - key: information.txt
+                path: information.txt

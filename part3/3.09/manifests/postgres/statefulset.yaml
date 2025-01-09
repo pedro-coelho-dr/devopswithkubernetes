@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: todo-db-stset
-  namespace: todo-main
+  name: postgres-stset
+  namespace: pingpong-log
   labels:
-    app: todo-db
+    app: postgres
 spec:
-  serviceName: todo-db-service
+  serviceName: postgres-service
   replicas: 1
   selector:
     matchLabels:
-      app: todo-db
+      app: postgres
   template:
     metadata:
       labels:
-        app: todo-db
+        app: postgres
     spec:
       containers:
         - name: postgres
@@ -25,41 +25,37 @@ spec:
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: todo-db-secret
+                  name: postgres-secret
                   key: POSTGRES_USER
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: todo-db-secret
+                  name: postgres-secret
                   key: POSTGRES_PASSWORD
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: todo-db-secret
+                  name: postgres-secret
                   key: POSTGRES_DB
-                  
           volumeMounts:
-            - name: todo-db-data
+            - name: postgres-data
               mountPath: /var/lib/postgresql/data
               subPath: postgres
           resources:
             requests:
-              memory: "256Mi"
-              cpu: "500m"
+              memory: "128Mi"  
+              cpu: "250m"     
             limits:
-              memory: "512Mi"
-              cpu: "1"
-
-
+              memory: "256Mi"  
+              cpu: "500m"      
   volumeClaimTemplates:
     - metadata:
-        name: todo-db-data
+        name: postgres-data
         labels:
-          app: todo-db
+          app: postgres
       spec:
         accessModes:
           - ReadWriteOnce
         resources:
           requests:
             storage: 1Gi
-        storageClassName: standard
