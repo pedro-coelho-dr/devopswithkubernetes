@@ -4,9 +4,9 @@ metadata:
   name: todo-app-service
   namespace: todo-main
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: todo-app
   ports:
-    - port: 80
+    - port: 5000
       targetPort: 5000

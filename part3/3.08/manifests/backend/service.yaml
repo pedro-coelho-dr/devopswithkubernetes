@@ -4,7 +4,7 @@ metadata:
   name: todo-backend-service
   namespace: todo-main
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: todo-backend
   ports:
