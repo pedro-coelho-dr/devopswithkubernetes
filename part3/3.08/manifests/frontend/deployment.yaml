@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app
+  namespace: todo
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      volumes:
+        - name: todo-images
+          persistentVolumeClaim:
+            claimName: todo-pvc
+      containers:
+        - name: todo-app
+          image: PROJECT/FRONTEND_IMAGE:TAG
+          volumeMounts:
+            - name: todo-images
+              mountPath: /usr/src/app/data
+          ports:
+            - containerPort: 5000

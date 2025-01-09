@@ -1,0 +1,55 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgres-backup
+  namespace: cronjob
+spec:
+  schedule: "*/15 * * * *"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup
+            image: gcr.io/dwk-gke-445103/backup-with-gsutil
+            env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_DB
+            - name: BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: backup-bucket-secret
+                  key: BUCKET_NAME
+            volumeMounts:
+            - name: gcp-key
+              mountPath: /var/secrets/google
+              readOnly: true
+            command:
+            - /bin/bash
+            - -c
+            - |
+              export URL="postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres-svc:5432/${POSTGRES_DB}"; \
+              pg_dump -v "$URL" > /tmp/backup.sql && \
+              echo "Backup complete: /tmp/backup.sql"; \
+              gsutil cp /tmp/backup.sql gs://${BUCKET_NAME}/backup.sql && \
+              echo "Backup uploaded to Google Cloud Storage"
+          restartPolicy: Never
+          volumes:
+          - name: gcp-key
+            secret:
+              secretName: gcp-storage-key
