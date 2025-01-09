@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: todo-db-stset
-  namespace: todo
+  namespace: todo-main
   labels:
     app: todo-db
 spec:

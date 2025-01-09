@@ -28,6 +28,10 @@ resources:
   # CronJobs
   - jobs/cronjob.yaml
 
+  # HorizontalPodAutoscalers
+  - backend/horizontalpodautoscaler.yaml
+  - frontend/horizontalpodautoscaler.yaml
+
 images:
   - name: PROJECT/BACKEND_IMAGE
     newName: gcr.io/dwk-gke-445103/todo-app-backend

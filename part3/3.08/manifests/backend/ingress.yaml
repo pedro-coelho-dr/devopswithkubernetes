@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: todo-backend-ingress
-  namespace: todo
+  namespace: todo-main
 spec:
   rules:
     - http:

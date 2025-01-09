@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: todo-cronjob
-  namespace: todo
+  namespace: todo-main
   labels:
     app: todo-cronjob
 
