@@ -79,7 +79,7 @@ jobs:
 
       - name: Deploy to GKE
         run: |
-          cd ./part3/3.03/manifests
+          cd ./part3/3.05/manifests
           kustomize edit set namespace todo-${{ github.ref_name }}
           kustomize edit set image PROJECT/BACKEND_IMAGE=gcr.io/${{ env.PROJECT_ID }}/${{ env.BACKEND_IMAGE }}:${{ env.BRANCH }}-${{ github.sha }}
           kustomize edit set image PROJECT/FRONTEND_IMAGE=gcr.io/${{ env.PROJECT_ID }}/${{ env.FRONTEND_IMAGE }}:${{ env.BRANCH }}-${{ github.sha }}
