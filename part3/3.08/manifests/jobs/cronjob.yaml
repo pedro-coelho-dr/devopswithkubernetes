@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: todo-cronjob
+  namespace: todo-main
+  labels:
+    app: todo-cronjob
+
+spec:
+  schedule: "0 * * * *"
+  jobTemplate:
+    metadata:
+      labels:
+        app: todo-cronjob
+    spec:
+      template:
+        metadata:
+          labels:
+            app: todo-cronjob
+        spec:
+          containers:
+          - name: todo-cronjob-container
+            image: PROJECT/CRONJOB_IMAGE:TAG
+            env:
+            - name: BACKEND_URL
+              value: "http://todo-backend-service:5001/todos"
+          restartPolicy: OnFailure
