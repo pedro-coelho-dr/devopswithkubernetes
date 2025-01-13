@@ -19,12 +19,27 @@ spec:
           image: pedrocoelhodr/log-output:writer-1.7
           ports:
             - containerPort: 3001
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "32Mi"
+            limits:
+              cpu: "100m"
+              memory: "64Mi"
+
 
         - name: reader
           image: pedrocoelhodr/log-output:reader-1.8
           ports:
             - containerPort: 3002
-
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "32Mi"
+            limits:
+              cpu: "100m"
+              memory: "64Mi"
+              
           env:
             - name: MESSAGE
               valueFrom:
